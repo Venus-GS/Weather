@@ -1,11 +1,6 @@
 package devenus.rodi.weather
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import devenus.rodi.weather.base.BaseActivity
+import devenus.rodi.weather.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-    }
-}
+class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main)
