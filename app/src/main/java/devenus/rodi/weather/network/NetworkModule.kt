@@ -16,7 +16,7 @@ class NetworkModule {
 
     private companion object {
         private const val TIMEOUT: Long = 15
-        private const val WEATHER_URL = "https://www.metaweather.com/api"
+        private const val WEATHER_URL = "https://www.metaweather.com"
     }
 
     @Provides

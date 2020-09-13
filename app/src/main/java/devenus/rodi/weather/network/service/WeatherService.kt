@@ -8,9 +8,9 @@ import retrofit2.http.Query
 
 interface WeatherService {
 
-    @GET("/location/search/")
+    @GET("/api/location/search/")
     suspend fun getLocationList(@Query("query") searchWord: String): List<LocationResponse>
 
-    @GET("/location/{woeId}/")
+    @GET("/api/location/{woeId}/")
     suspend fun getWeather(@Path("woeId") woeId: Int) : LocationWeatherResponse
 }
