@@ -7,6 +7,10 @@ import androidx.lifecycle.viewModelScope
 import devenus.rodi.weather.base.BaseViewModel
 import devenus.rodi.weather.data.WeatherRepository
 import devenus.rodi.weather.network.response.ConsolidatedWeather
+import devenus.rodi.weather.utils.EventLiveData
+import devenus.rodi.weather.utils.MutableEventLiveData
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onStart
@@ -27,7 +31,15 @@ class MainViewModel @ViewModelInject constructor(
     val resultList : LiveData<List<ResultItem>>
         get() = _resultList
 
+    private val _onSwipeRefresh = MutableEventLiveData<Unit>()
+    val onSwipeRefresh: EventLiveData<Unit>
+        get() = _onSwipeRefresh
+
     init {
+        getWeather()
+    }
+
+    private fun getWeather() {
         viewModelScope.launch {
             weatherRepository.getLocationList(SEARCH_WORD)
                 .onStart { _loading.value = true }
@@ -37,17 +49,20 @@ class MainViewModel @ViewModelInject constructor(
                 .collect { locationList ->
                     if (locationList.isNotEmpty()) {
                         resultItemList.add(ResultItem())
-                        locationList.forEach {
-                            getWeather(it.city, it.woeId)
+                        val results = locationList.map {
+                            async {
+                                getLocationWeather(it.city, it.woeId)
+                            }
                         }
+                        results.awaitAll()
+                        _resultList.value = resultItemList
+                        _loading.value = false
                     }
                 }
-            _resultList.value = resultItemList
-            _loading.value = false
         }
     }
 
-    private suspend fun getWeather(city: String, woeId: Int) {
+    private suspend fun getLocationWeather(city: String, woeId: Int) {
         weatherRepository.getLocationWeather(woeId)
             .catch { throwable ->
                 Timber.e(throwable)
@@ -55,6 +70,11 @@ class MainViewModel @ViewModelInject constructor(
             .collect { weatherList ->
                 resultItemList.add(ResultItem(city, weatherList))
             }
+    }
+
+    fun onSwipeRefresh() {
+        _onSwipeRefresh.event = Unit
+        getWeather()
     }
 
     data class ResultItem(

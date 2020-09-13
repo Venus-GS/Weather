@@ -7,6 +7,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import devenus.rodi.weather.R
 import devenus.rodi.weather.base.BaseActivity
 import devenus.rodi.weather.databinding.ActivityMainBinding
+import devenus.rodi.weather.utils.EventObserver
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
@@ -27,6 +28,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             if (it.isNotEmpty()) {
                 adapter.submitList(it)
             }
+        })
+
+        viewModel.onSwipeRefresh.observe(this, EventObserver {
+            binding.srlRefresh.isRefreshing = false
         })
     }
 }
