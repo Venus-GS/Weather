@@ -7,8 +7,12 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import devenus.rodi.weather.databinding.ItemWeatherBinding
 import devenus.rodi.weather.databinding.ItemWeatherHeaderBinding
+import devenus.rodi.weather.utils.second
+import devenus.rodi.weather.utils.setHumidityText
+import devenus.rodi.weather.utils.setTemperatureText
 import devenus.rodi.weather.utils.urlGlide
 import devenus.rodi.weather.view.WeatherAdapter.Companion.BASE_IMAGE_URL
+import kotlin.math.roundToInt
 
 class WeatherAdapter : ListAdapter<MainViewModel.ResultItem, RecyclerView.ViewHolder>(itemDiff) {
 
@@ -62,14 +66,16 @@ class ItemViewHolder(private val binding: ItemWeatherBinding) : RecyclerView.Vie
     fun bind(item: MainViewModel.ResultItem){
         binding.apply {
             tvWeatherLocal.text = item.city
+
             tvTodayName.text = item.weatherList.first().weather
-            tvTodayTemperature.text = item.weatherList.first().temperature.toString()
-            tvTodayHumidity.text = item.weatherList.first().humidity.toString()
-            tvTomorrowName.text = item.weatherList[1].weather
-            tvTomorrowTemperature.text = item.weatherList[1].temperature.toString()
-            tvTomorrowHumidity.text = item.weatherList[1].humidity.toString()
+            tvTodayTemperature.setTemperatureText(item.weatherList.first().temperature.roundToInt())
+            tvTodayHumidity.setHumidityText(item.weatherList.first().humidity)
             ivTodayIcon.urlGlide("$BASE_IMAGE_URL${item.weatherList.first().weatherImage}.png")
-            ivTomorrowIcon.urlGlide("$BASE_IMAGE_URL${item.weatherList[1].weatherImage}.png")
+
+            tvTomorrowName.text = item.weatherList[1].weather
+            tvTomorrowTemperature.setTemperatureText(item.weatherList.second().temperature.roundToInt())
+            tvTomorrowHumidity.setHumidityText(item.weatherList.second().humidity)
+            ivTomorrowIcon.urlGlide("$BASE_IMAGE_URL${item.weatherList.second().weatherImage}.png")
         }
     }
 }

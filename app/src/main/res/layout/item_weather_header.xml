@@ -8,24 +8,25 @@
 
     <TextView
         android:id="@+id/tv_header_local"
+        style="@style/default_style"
         android:layout_width="@dimen/constraint_match"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:paddingVertical="20dp"
         android:text="@string/weather_header_local"
-        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/tv_header_today"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         tools:text="@string/weather_header_local" />
 
     <TextView
         android:id="@+id/tv_header_today"
         android:layout_width="@dimen/constraint_match"
         android:layout_height="wrap_content"
+        android:background="@drawable/bg_horizontal_both_line"
         android:gravity="center"
         android:paddingVertical="20dp"
         android:text="@string/weather_header_today"

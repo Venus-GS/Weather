@@ -4,4 +4,6 @@
     <string name="weather_header_local">Local</string>
     <string name="weather_header_today">Today</string>
     <string name="weather_header_tomorrow">Tomorrow</string>
+    <string name="temperature">%d\u2103</string>
+    <string name="humidity">%d%%</string>
 </resources>
