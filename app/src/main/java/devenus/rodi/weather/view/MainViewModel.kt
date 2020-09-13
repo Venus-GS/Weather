@@ -28,7 +28,7 @@ class MainViewModel @ViewModelInject constructor(
     private var resultItemList = mutableListOf<ResultItem>()
 
     private val _resultList = MutableLiveData<List<ResultItem>>()
-    val resultList : LiveData<List<ResultItem>>
+    val resultList: LiveData<List<ResultItem>>
         get() = _resultList
 
     private val _onSwipeRefresh = MutableEventLiveData<Unit>()

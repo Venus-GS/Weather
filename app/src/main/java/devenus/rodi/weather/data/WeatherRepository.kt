@@ -27,7 +27,7 @@ class WeatherRepositoryImpl(
 
 interface WeatherRepository {
 
-    fun getLocationList(searchWord: String) : Flow<List<LocationResponse>>
+    fun getLocationList(searchWord: String): Flow<List<LocationResponse>>
 
-    fun getLocationWeather(woeId: Int) : Flow<List<ConsolidatedWeather>>
+    fun getLocationWeather(woeId: Int): Flow<List<ConsolidatedWeather>>
 }

@@ -23,14 +23,14 @@ class WeatherAdapter : ListAdapter<MainViewModel.ResultItem, RecyclerView.ViewHo
     }
 
     override fun getItemViewType(position: Int): Int {
-        return when(position) {
+        return when (position) {
             0 -> HEADER
             else -> ITEM
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        when(viewType) {
+        when (viewType) {
             HEADER -> {
                 val binding = ItemWeatherHeaderBinding.inflate(
                     LayoutInflater.from(parent.context),
@@ -62,8 +62,9 @@ class WeatherAdapter : ListAdapter<MainViewModel.ResultItem, RecyclerView.ViewHo
 class HeaderItemViewHolder(private val binding: ItemWeatherHeaderBinding) :
     RecyclerView.ViewHolder(binding.root)
 
-class ItemViewHolder(private val binding: ItemWeatherBinding) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(item: MainViewModel.ResultItem){
+class ItemViewHolder(private val binding: ItemWeatherBinding) :
+    RecyclerView.ViewHolder(binding.root) {
+    fun bind(item: MainViewModel.ResultItem) {
         binding.apply {
             tvWeatherLocal.text = item.city
 

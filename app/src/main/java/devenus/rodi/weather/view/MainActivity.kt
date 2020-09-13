@@ -12,9 +12,9 @@ import devenus.rodi.weather.utils.EventObserver
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
-    private val viewModel : MainViewModel by viewModels()
+    private val viewModel: MainViewModel by viewModels()
 
-    private val adapter : WeatherAdapter by lazy { WeatherAdapter() }
+    private val adapter: WeatherAdapter by lazy { WeatherAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -12,5 +12,5 @@ interface WeatherService {
     suspend fun getLocationList(@Query("query") searchWord: String): List<LocationResponse>
 
     @GET("/api/location/{woeId}/")
-    suspend fun getWeather(@Path("woeId") woeId: Int) : LocationWeatherResponse
+    suspend fun getWeather(@Path("woeId") woeId: Int): LocationWeatherResponse
 }

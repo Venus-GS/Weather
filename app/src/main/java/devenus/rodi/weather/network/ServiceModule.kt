@@ -12,6 +12,6 @@ import retrofit2.Retrofit
 class ServiceModule {
 
     @Provides
-    fun provideWeatherService(retrofit: Retrofit) : WeatherService =
+    fun provideWeatherService(retrofit: Retrofit): WeatherService =
         retrofit.create(WeatherService::class.java)
 }
