@@ -1,4 +1,4 @@
-package devenus.rodi.weather.util
+package devenus.rodi.weather.utils
 
 import android.view.View
 import androidx.databinding.BindingAdapter

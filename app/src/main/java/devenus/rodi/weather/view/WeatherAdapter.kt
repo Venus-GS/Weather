@@ -7,12 +7,15 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import devenus.rodi.weather.databinding.ItemWeatherBinding
 import devenus.rodi.weather.databinding.ItemWeatherHeaderBinding
+import devenus.rodi.weather.utils.urlGlide
+import devenus.rodi.weather.view.WeatherAdapter.Companion.BASE_IMAGE_URL
 
 class WeatherAdapter : ListAdapter<MainViewModel.ResultItem, RecyclerView.ViewHolder>(itemDiff) {
 
     companion object {
         const val HEADER = 0
         const val ITEM = 1
+        const val BASE_IMAGE_URL = "https://www.metaweather.com/static/img/weather/png/"
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -65,6 +68,8 @@ class ItemViewHolder(private val binding: ItemWeatherBinding) : RecyclerView.Vie
             tvTomorrowName.text = item.weatherList[1].weather
             tvTomorrowTemperature.text = item.weatherList[1].temperature.toString()
             tvTomorrowHumidity.text = item.weatherList[1].humidity.toString()
+            ivTodayIcon.urlGlide("$BASE_IMAGE_URL${item.weatherList.first().weatherImage}.png")
+            ivTomorrowIcon.urlGlide("$BASE_IMAGE_URL${item.weatherList[1].weatherImage}.png")
         }
     }
 }
