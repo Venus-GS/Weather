@@ -19,7 +19,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         super.onCreate(savedInstanceState)
 
         binding.apply {
-            viewModel = viewModel
+            viewModel = this@MainActivity.viewModel
             rvWeather.adapter = adapter
         }
 
